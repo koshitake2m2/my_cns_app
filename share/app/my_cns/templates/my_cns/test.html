@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Script-Type" content="text/javascript"/>
+    <meta http-equiv="Content-Style-Type" content="text/css"/>
+    <title>ActiveCampus</title>
+    <link rel="stylesheet" href="../css/theme.css"/>
+    <link rel="stylesheet" href="../css/message.css"/>
+    <link rel="stylesheet" href="../css/entrance.css"/>
+    <script type="text/JavaScript" src="../js/jquery-1.2.6.min.js"></script>
+    <script type="text/JavaScript" src="../js/ac.js"></script>
+    <script type="text/javascript">
+      <!-- function FrameSizeChange(){ parent.document.getElementById(\'acTopFlame\').rows = "*"; } //-->
+    </script>
+  </head>
+  <body class="login" onload="FrameSizeChange();document.login_form.login.focus();">
+    <div class="header">
+      <img src="../image/ssologo.png" class="ac-logo-ent">
+    </div>
+    <div class="main content clearfix">
+      <div class="aside">
+        <div class="login-box">
+          <form style="margin:0 0;" autocomplete="off" name="login_form" method="POST">
+            <input type="hidden" name="mode" value="Login"/>
+            <input id="clickcheck" type="hidden" name="clickcheck" value="0"/>
+            <label>
+              <strong class="username-label">ã\x83\xadã\x82°ã\x82¤ã\x83³ID</strong>
+              <input name="login" type="text" tabindex="1"/>
+            </label>
+            <label>
+              <strong class="passwd-label">ã\x83\x91ã\x82¹ã\x83¯ã\x83¼ã\x83\x89</strong>
+              <input tabindex="2" type="password" name="passwd"/>
+            </label>
+            <input type="submit" tabindex="3" class="button button-submit" value="ã\x83\xadã\x82°ã\x82¤ã\x83³" style="margin:20px 60px 10px"/>
+            <p style="font-size: 90%">
+              <a href="https://idm.yamanashi.ac.jp/password-remainder" target="_blank" rel="noopener">ã\x83\x91ã\x82¹ã\x83¯ã\x83¼ã\x83\x89ã\x82\x92å¿\x98ã\x82\x8cã\x81\x9fæ\x96¹ã\x81¯ã\x81\x93ã\x81¡ã\x82\x89</a>
+            </p>
+          </form>
+        </div>
+      </div>
+      <div id="help" style="margin-right:35px">
+        <a href="#" onclick="window.open(\'../module/Help.php?img_on=1&module=Message&function=1&tab=1\',\'\',\'width=900,scrollbars=yes,resizable=yes\'); return false;"><img title="ã\x83\x98ã\x83«ã\x83\x97" src="../image/help.png" border="0"/></a>
+      </div>
+      <h1>ç·\x8få\x90\x88æ\x83\x85å\xa0±æ\x88¦ç\x95¥æ©\x9fæ§\x8bã\x81\x8bã\x82\x89 ã\x81\x8aç\x9f¥ã\x82\x89ã\x81\x9b</h1>
+      <div class="top_info">
+        <p>
+          <form name="F1" target="_self" action="/ActiveCampus/module/Login.php" method="POST" enctype="application/x-www-form-urlencoded" class="ac">
+            <input type="hidden" name="class" value="acMessage"/>
+            <input type="hidden" name="pid" value="acMessage"/>
+            <input type="hidden" name="mode" value=""/>
+            <div class="fl">
+              ã\x81\x8aç\x9f¥ã\x82\x89ã\x81\x9bã\x81¯ã\x80\x81ã\x81\x82ã\x82\x8aã\x81¾ã\x81\x9bã\x82\x93ã\x80\x82
+            </div>
+            <table border="0" cellpadding="0" cellspacing="0" class="new_message"></table>
+          </form>
+        </p>
+      </div>
+      <div class="top_option">
+        <a href="../module/Message.php?mode=backno" target="ac_message_backno" class="link_arrow">ã\x83\x90ã\x83\x83ã\x82¯ã\x83\x8aã\x83³ã\x83\x90ã\x83¼</a>
+      </div>
+    </div>
+  </body>
+</html>

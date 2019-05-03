@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+    mycnsapp:
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+        container_name: mycnsapp1
+        ports:
+            - "8000:8000"
+        volumes:
+            - ${HOME}/cns/share:/share
+        tty: true
+        command: python3 /share/app/manage.py runserver 0.0.0.0:8000

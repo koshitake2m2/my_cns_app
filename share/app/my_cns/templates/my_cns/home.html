@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="" rel="stylesheet">
+    <title>hello</title>
+    <style></style>
+  </head>
+  <body>
+    <p>hello</p>
+    <p>hello</p>
+    <p>{{ messages }}</p>
+    <p>{{ hello }}</p>
+    <p>{{ cns_home_text }}</p>
+    <h1>Login</h1>
+    <p>username:
+      {{ username }}</p>
+    <form action="{% url 'my_cns:home' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="username">
+      <input type="password" name="password">
+      <input type="submit">
+    </form>
+
+  </body>
+</html>

@@ -1,0 +1,90 @@
+{% extends 'my_cns/base.html' %}
+{% block content %}
+  {% load static %}
+
+  <a href="{% url 'my_cns:home' %}">CNS homeへ</a>
+
+  <h1>Latest Topics List</h1>
+  <hr>
+  <div id="topics_list">
+    {% for topic in topics_list %}
+      <div class="card indigo {% if topic.is_read %}bg-light{% endif %} border-light mb-1 text-center z-depth-2" style="width: auto; height: auto;">
+        <div class="card-body">
+          <a href="{% url 'my_cns:topic_detail' %}?topic_id={{ topic.id }}" target="_blank">
+            <p class="card-title">
+              <!-- note: 三点リーダーを使うのもいいが、タイトルが見える限り見えるのもいいかもしれない <p class="card-title" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"> -->
+              {% if topic.file_exists %}<img src="{% static 'my_cns/images/clip.gif' %}" alt="file" style="width: 15px; height: 15px;">{% endif %}{{ topic.title }}</p>
+          </a>
+          <div class="card-footer {% if topic.is_read %}bg-light{% endif %} d-flex justify-content-between">
+            <p class="mb-0" style="font-size: 50%;">{{ topic.date }}</p>
+            <p class="mb-0" style="font-size: 50%;">{{ topic.community }}</p>
+            <p class="mb-0" style="font-size: 50%;">{{ topic.author }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <p id="loading">
+    Loading...
+  </p>
+
+{% endblock %}
+
+{% block foot %}
+  <script>
+    var next_page = 2;
+    var is_loading = false;
+
+    // 無限スクロールの実装
+    $(document).ready(function () {
+      var win = $(window);
+      // Each time the user scrolls
+      win.scroll(function () {
+        // End of the document reached?
+        if ($(document).height() - win.height() == win.scrollTop() && is_loading == false) {
+          $('#loading').show();
+          is_loading = true;
+
+          $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8000/my_cns/topics_list/' + String(next_page)
+          }).done(function (res) {
+            // GET した後の処理
+            next_page += 1;
+            $.each(res['topics_list'], function (i, e) {
+              $('#topics_list').append(nextTopicHtml(e));
+            })
+            $('#loading').hide();
+            is_loading = false;
+          }).fail(function () {
+            is_loading = false;
+          });
+        }
+      });
+    });
+
+    // topicリストのカード一つを作成
+    function nextTopicHtml(data) {
+      var next_topic_html = '<p>' + data.title + '</p>';
+      next_topic_html = `
+      <div class="card indigo ${data.is_read
+        ? 'bg-light'
+        : ''} border-light mb-1 text-center z-depth-2" style="width: auto; height: auto;">
+        <div class="card-body">
+          <a href="" target="_blank">
+            <p class="card-title" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${data.title}</p>
+          </a>
+          <div class="card-footer ${data.is_read
+          ? 'bg-light'
+          : ''} d-flex justify-content-between">
+            <p class="mb-0" style="font-size: 50%;">${data.date}</p>
+            <p class="mb-0" style="font-size: 50%;">${data.community}</p>
+            <p class="mb-0" style="font-size: 50%;">${data.author}</p>
+          </div>
+        </div>
+      </div>
+      `
+      return next_topic_html
+    }
+  </script>
+{% endblock %}

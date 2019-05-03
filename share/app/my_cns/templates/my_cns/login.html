@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends 'my_cns/base.html' %}
+{% block content %}
+  {% load static %}
+
+  <div class="container-fluid">
+    <h1>My CNS Login</h1>
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"></h1>
+        <form action="{% url 'my_cns:login' %}" method="post">
+          {% csrf_token %}
+          <div class="md-form mb-0">
+
+            <!-- username -->
+            <label for="input_username"><img src="{% static 'my_cns/images/baseline-person-24px.svg' %}" alt="person"></label>
+            <input id="input_username" type="text" name="username" class="form-control" placeholder="username">
+            <br>
+            <!-- password -->
+            <label for="input_password"><img src="{% static 'my_cns/images/baseline-lock-24px.svg' %}" alt="password"></label>
+            <input id="input_password" type="password" name="password" class="form-control" placeholder="password">
+            <br>
+            <!-- submit -->
+            <input type="hidden" name="next" value="{{ next }}">
+            <button class="btn btn-outline-info btn-block" type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

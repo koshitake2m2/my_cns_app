@@ -1,0 +1,16 @@
+# CNS
+request_cns_with_cookie.py
+
+# 環境変数
+.env
+
+# macの不要ファイル
+.DS_Store
+._*
+
+# django
+__pycache__
+*.py[co]
+db.sqlite3
+*.sqlite3
+media/

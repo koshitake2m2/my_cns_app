@@ -1,0 +1,45 @@
+{% extends 'my_cns/base.html' %}
+{% block content %}
+  {% load static %}
+
+  <h1>Topic Detail</h1>
+  <hr>
+
+  <div class="card indigo border-light mb-1 text-left z-depth-2" style="width: auto; height: auto;">
+    <div class="card-body">
+      <h4 class="card-title">
+        {{ topic.title }}
+      </h4>
+      <div class="card-text d-flex justify-content-between">
+        <p class="mb-0" style="font-size: 50%;">{{ topic.date }}
+          {{ topic.time_hms }}</p>
+      </div>
+      <hr>
+      <table>
+        <tr>
+          <td>{{ topic.community }}：{{ topic.category }}</td>
+        </tr>
+        <tr>
+          <td>{{ topic.author }}({{ topic.author_affiliation}})</td>
+        </tr>
+      </table>
+      <hr style="border-bottom: dotted;">
+      {% autoescape off %}
+        <p class="card-text">{{ topic.text }}</p>
+      {% endautoescape %}
+      <div class="card-footer">
+        {% for attached_file in topic.attached_files %}
+          <p><img src="{% static 'my_cns/images/clip.gif' %}" alt="file" style="width: 15px; height: 15px;">
+            <a href="{{ attached_file.link }}">{{ attached_file.name }}</a>
+          </p>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block foot %}
+  <script></script>
+{% endblock %}
